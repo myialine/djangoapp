@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Wisdom Pet Home</title>
-</head>
-<body>
-<h1>Home</h1>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <h3>Home</h3>
+            {% for pet in pets %}
+            <div class="petname">
+                <a href="{% url 'pet_detail' pet.id %}">
+                <h4>{{ pet.name|capfirst }}</h4>
+                </a>
+                <p>{{ pet.species }}</p>
+                {% if pet.breed %}
+                    <p>Breed: {{ pet.breed }}</p>
+                {% endif %}
+                <p class="hidden">{{ pet.description }}</p>
+            </div>
+            {% endfor %}
+</div>
+{% endblock %}
